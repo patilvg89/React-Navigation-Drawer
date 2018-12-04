@@ -35,8 +35,6 @@ export const AppDrawerNavigator = createDrawerNavigator({
     initialRouteName: 'Home',
     contentComponent: props => <Drawer {...props} />,
     headerStyle,
-    drawerType: 'slide',
-    drawerWidth: DEVICE_WIDTH - 100,
     headerMode: 'none',
     gesturesEnabled: true,
 });

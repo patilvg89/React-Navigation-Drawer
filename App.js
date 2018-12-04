@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {AppDrawerNavigator} from './src/router';
+import {createAppContainer} from 'react-navigation'
 
 export default class App extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
-        return <AppDrawerNavigator/>;
+        const MyAppContainer = createAppContainer(AppDrawerNavigator);
+
+        return <MyAppContainer/>;
     }
 }
