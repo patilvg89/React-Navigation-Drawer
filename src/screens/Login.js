@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Alert } from 'react-native';
+import {View, Alert, AsyncStorage} from 'react-native';
 import { Card, Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
-import { onSignIn } from '../utilities/auth';
+import {onSignIn, USER_KEY} from '../utilities/auth';
 
 // import CustomAlert from '../components/CustomAlert';
 
@@ -35,19 +35,22 @@ class Login extends Component {
             backgroundColor='#03A9F4'
             title='SIGN IN'
             onPress={() => {
-              onSignIn(this.state.date_of_birth, this.state.e_phone_no).then((data) => {
-                if (data.status) {
-                  console.log(JSON.stringify(data));
-                  this.props.navigation.navigate('SignedIn');
-                } else {
-                  Alert.alert('Error', 'Date of Birth or Mobile No is wrong', 
-                  [
-                    { text: 'OK', onPress: () => console.log('OK Pressed') }
-                  ],
-                  { cancelable: false }
-                  );
-                }
-              });
+                AsyncStorage.setItem(USER_KEY, 'true')
+                this.props.navigation.navigate('SignedIn');
+
+              // onSignIn(this.state.date_of_birth, this.state.e_phone_no).then((data) => {
+              //   if (data.status) {
+              //     console.log(JSON.stringify(data));
+              //     this.props.navigation.navigate('SignedIn');
+              //   } else {
+              //     Alert.alert('Error', 'Date of Birth or Mobile No is wrong',
+              //     [
+              //       { text: 'OK', onPress: () => console.log('OK Pressed') }
+              //     ],
+              //     { cancelable: false }
+              //     );
+              //   }
+              // });
             }}
           />
         </Card>

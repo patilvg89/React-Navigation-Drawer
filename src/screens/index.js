@@ -1,4 +1,4 @@
-import { DrawerNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation';
 import Home from './Home';
 import ExamHistory from './ExamHistory';
 import Account from './Account';
@@ -6,7 +6,7 @@ import Setting from './Setting';
 import AboutUs from './AboutUs';
 import Drawer from '../components/Drawer';
 
-export default DrawerNavigator({
+export default createDrawerNavigator({
   Home: {
     screen: Home
   },

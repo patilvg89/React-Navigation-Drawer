@@ -1,8 +1,7 @@
 import React from 'react';
-import {Platform, StatusBar} from 'react-native';
-import {createDrawerNavigator, createStackNavigator, createSwitchNavigator} from 'react-navigation';
+import {Dimensions, Platform, StatusBar} from 'react-native';
+import {createDrawerNavigator} from 'react-navigation';
 // import { FontAwesome } from 'react-native-vector-icons';
-import SignIn from './screens/Login';
 import Home from './screens/Home';
 import ExamHistory from './screens/ExamHistory';
 import Account from './screens/Account';
@@ -10,22 +9,13 @@ import Setting from './screens/Setting';
 import AboutUs from './screens/AboutUs';
 import Drawer from './components/Drawer';
 
+const DEVICE_WIDTH = Dimensions.get('window').width;
+
 const headerStyle = {
     marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
 };
 
-
-export const SignedOut = createStackNavigator({
-    SignIn: {
-        screen: SignIn,
-        navigationOptions: {
-            title: 'Sign In',
-            headerStyle
-        }
-    }
-});
-
-export const SignedIn = createDrawerNavigator({
+export const AppDrawerNavigator = createDrawerNavigator({
     Home: {
         screen: Home
     },
@@ -43,22 +33,11 @@ export const SignedIn = createDrawerNavigator({
     }
 }, {
     initialRouteName: 'Home',
-    contentComponent: Drawer
+    contentComponent: props => <Drawer {...props} />,
+    headerStyle,
+    drawerType: 'slide',
+    drawerWidth: DEVICE_WIDTH - 100,
+    headerMode: 'none',
+    gesturesEnabled: true,
 });
 
-
-export const createRootNavigator = (signedIn = false) => {
-    return createSwitchNavigator(
-        {
-            SignedIn: {
-                screen: SignedIn
-            },
-            SignedOut: {
-                screen: SignedOut
-            }
-        },
-        {
-            initialRouteName: signedIn ? 'SignedIn' : 'SignedOut'
-        }
-    );
-};
